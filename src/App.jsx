@@ -12,7 +12,7 @@ function App() {
 
 async function fetchData(){
         try {
-            const countryData = await axios.get("https://restcountries.com/v3.1/all?fields=name,population,flags,region")
+            const countryData = await axios.get("https://restcountries.com/v3.1/all?fields=name,population,flags,region,cca3")
             console.log(countryData)
             setCountrys(countryData.data)
         }
@@ -31,8 +31,8 @@ async function fetchData(){
 
             <ul className="countryList">
             {countrys.sort((a, b) => a.population - b.population).map((country) => {
-                return <li key="id" className="list">
-                    <img src={country.flags.png} alt="flag" className="flags" width={50} />
+                return <li key={country.cca3} className="list">
+                    <img src={country.flags.png} alt="flag" className="flagss" width={50} />
                     <h2 style={{ color: getColorByRegion(country.region)}}>{country.name.common}</h2> {" "}
                     {`has a population of ${country.population} people` }
 
