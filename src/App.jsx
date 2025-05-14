@@ -7,7 +7,7 @@ import { getColorByRegion} from "./helpers/location.js";
 function App() {
 
     const [countrys, setCountrys] = useState([])
-
+    const [clicked, setClicked] = useState(false);
 
 
 async function fetchData(){
@@ -19,14 +19,15 @@ async function fetchData(){
         catch(e){
             console.error(e)
         }
-    }
-
+}
 
 
     return (
         <>
             <img src={map} alt="map"/>
-           <button className="countryButton" onClick={ () => fetchData()}>Click here!</button>
+            <div className="buttonClick">
+                {clicked ? <h3 className="h3Text"> World Regions </h3> : ''}
+                <button className="countryButton" onClick={() => fetchData() && setClicked(true)} style={{display: clicked ? 'none' : 'inline-block'}}>Click here!</button></div>
 
             <ul className="countryList">
             {countrys.sort((a, b) => a.population - b.population).map((country) => {

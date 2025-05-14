@@ -5,6 +5,7 @@
     border-radius: 15px;
     background-color: #501010;
     color: white;
+
 }
 
 .flags{
@@ -13,14 +14,30 @@
 
 .list{
     list-style: none;
+    border: 1px solid black;
+    width: 250px;
     margin: 40px;
+    padding: 20px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 .countryList{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+h2{
+    text-align: center;
 }
 
 
-
+.buttonClick{
+    display: flex;
+    justify-content: center;
+}
+.h3Text{
+    font-size: 3em;
+}
