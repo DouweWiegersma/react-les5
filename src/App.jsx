@@ -1,6 +1,9 @@
 import './App.css';
 import axios from 'axios'
 import {useState} from "react";
+import map from "./assets/world_map.png"
+import { getColorByRegion} from "./helpers/location.js";
+
 function App() {
 
     const [countrys, setCountrys] = useState([])
@@ -9,7 +12,7 @@ function App() {
 
 async function fetchData(){
         try {
-            const countryData = await axios.get("https://restcountries.com/v3.1/all?fields=name,population,flags")
+            const countryData = await axios.get("https://restcountries.com/v3.1/all?fields=name,population,flags,region")
             console.log(countryData)
             setCountrys(countryData.data)
         }
@@ -22,14 +25,16 @@ async function fetchData(){
 
     return (
         <>
-
+            <img src={map} alt="map"/>
            <button className="countryButton" onClick={ () => fetchData()}>Click here!</button>
-            <ul>
-            {countrys.map((country) => {
-                return <li key="name">
-                    <img src={country.flags.png} alt="flag" className="flags"/>
-                {country.name.common}q
-                {country.population}
+
+            <ul className="countryList">
+            {countrys.sort((a, b) => a.population - b.population).map((country) => {
+                return <li key="id" className="list">
+                    <img src={country.flags.png} alt="flag" className="flags" width={50} />
+                    <h2 style={{ color: getColorByRegion(country.region)}}>{country.name.common}</h2> {" "}
+                    {`has a population of ${country.population} people` }
+
                 </li>
             })}
             </ul>
